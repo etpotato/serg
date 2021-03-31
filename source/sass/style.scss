@@ -1,12 +1,12 @@
 @import "normalize.scss";
-@import "variables";
-@import "fonts";
-// @import "mixin";
+@import "variables.scss";
+@import "fonts.scss";
+@import "mixin.scss";
 // @import "libs";
-// @import "scaffolding";
+@import "scaffolding.scss";
 // @import "libs/swiper.scss";
+
 @import "blocks/page.scss";
-
 @import "blocks/header.scss";
-
+@import "blocks/logo.scss";
 @import "blocks/footer.scss";

@@ -1,49 +1,33 @@
 //Template Colors
-
 // Text
-$light-text-basic: #000000;
-$dark-text-basic: #ffffff;
-
-$light-text-positive: #20a936;
-$dark-text-positive: #76cd84;
-
-$light-text-negative: #e22424;
-$dark-text-negative: #f97c7c;
+$text-basic: #1a1a1a;
+$text-neutral: #4d4d4d;
+$text-accent: #c28767;
 
 // Background
-$light-background-basic: #ffffff;
-$dark-background-basic: #141415;
 
-$light-background-search: #f5f5f5;
-$dark-background-search: #323234;
+$background-basic: #ffffff;
+$background-underlay: rgba(0, 0, 0, 0.5);
 
-$light-background-card: #ffffff;
-$dark-background-card: #323234;
+// Border
 
-$light-background-positive: #2abd42;
-$dark-background-positive: #63a16d;
+$border-basic: #e8c4b0;
+$border-dim: #efe4da;
 
-$light-background-negative: #e22424;;
-$dark-background-negative: #f97c7c;
+// Shadow
 
-// Elements
-$light-interactive: #0872ed;
-$dark-interactive: #2f89f3;
-
+$shadow-region-link: 0 5px 20px rgba(198, 141, 110, 0.11);
 
 //Template containers
-$mobile-width-container: 540px;
-$tablet-width-container: 790px;
-$laptop-width-container: 1100px;
-$desktop-width-container: 1220px;
+$mobile-width-container: 760px;
+$tablet-width-container: 1100px;
+$desktop-width-container: 1440px;
 
 //Template breakpoints
-$mobile-width: 540px;
-$tablet-width: 760px;
-$laptop-width: 1100px;
+$tablet-width: 900px;
 $desktop-width: 1440px;
+$tv-width: 1920px;
 
 //Template retina media
 $retina-dpi: 144dpi;
 $retina-dppx: 1.5dppx;
-
