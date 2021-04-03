@@ -1,5 +1,6 @@
 .header {
-  // overflow-x: hidden;
+  padding-bottom: 20px;
+  background-color: transparent;
 }
 
 .header__top-wrapper {
@@ -43,14 +44,20 @@
   background-image: url("../img/icon-menu-burger.svg");
   border: none;
   outline-offset: 4px;
+  transition-timing-function: ease-in;
   transition-duration: 200ms;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
 
   &:focus:not(:focus-visible) {
     outline: none;
   }
 
-  &:focus-visible {
-    outline: 2px solid $text-basic;
+  &:active {
+    transform: none;
   }
 }
 
@@ -179,6 +186,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-right: auto;
+  margin-bottom: -15px;
   max-width: 360px;
 }
 
@@ -208,11 +216,25 @@
     background-repeat: no-repeat;
     background-position: center;
     box-shadow: $shadow-region-link;
+    transition-property: transform box-shadow;
+    transition-timing-function: ease-in;
+    transition-duration: 200ms;
   }
 
-  &:hover::before,
+  &:hover::before {
+    box-shadow: $shadow-region-link-hover;
+    transform: scale(1.1);
+  }
+
   &:focus::before {
     border: 4px solid $border-basic;
+    box-shadow: $shadow-region-link-hover;
+    transform: scale(1.1);
+  }
+
+  &:active::before {
+    box-shadow: $shadow-region-link;
+    transform: none;
   }
 
   &--face::before {
@@ -272,14 +294,13 @@
   }
 
   .header__region-wrapper {
-    margin-top: -150px;
-    padding: 20px 0;
+    margin-top: -130px;
   }
 
   .header__region-text {
     margin-top: 0;
     margin-bottom: 30px;
-    width: 55%;
+    width: 56%;
     min-width: 220px;
     font-size: 20px;
     line-height: 28px;
@@ -381,7 +402,6 @@
   }
 
   .header__region-wrapper {
-    padding-bottom: 40px;
     margin-top: -130px;
   }
 
@@ -438,8 +458,7 @@
     }
 
     .header__region-wrapper {
-      margin-top: -290px;
-      padding-bottom: 80px;
+      margin-top: -260px;
     }
 
     .header__region-text {
@@ -511,7 +530,7 @@
     }
 
     .header__region-wrapper {
-      margin-top: -330px;
+      margin-top: -300px;
     }
 
     .header__region-text {
@@ -522,6 +541,32 @@
 
     .header__region-list {
       max-width: 632px;
+    }
+
+    .header__region-link {
+      font-size: 18px;
+
+      &::before {
+        width: 135px;
+        height: 135px;
+        margin-bottom: 15px;
+      }
+
+      &--face::before {
+        background-size: 61px 72px;
+      }
+
+      &--breasts::before {
+        background-size: 62px 75px;
+      }
+
+      &--upperbody::before {
+        background-size: 64px 74px;
+      }
+
+      &--lowerbody::before {
+        background-size: 63px 73px;
+      }
     }
   }
 }

@@ -50,6 +50,9 @@
   background-position: center;
   background-size: 100%;
   outline-offset: 4px;
+  transition-property: transform filter;
+  transition-timing-function: ease-in;
+  transition-duration: 200ms;
 
   &--facebook {
     background-image: url("../img/icon-facebook.svg");
@@ -57,6 +60,12 @@
 
   &--instagram {
     background-image: url("../img/icon-instagram.svg");
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    filter: brightness(0.9);
   }
 }
 

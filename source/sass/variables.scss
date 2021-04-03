@@ -17,9 +17,10 @@ $border-dim: #efe4da;
 // Shadow
 
 $shadow-region-link: 0 5px 20px rgba(198, 141, 110, 0.11);
+$shadow-region-link-hover: 0 3px 15px rgba(198, 141, 110, 0.08);
 
 //Template containers
-$mobile-width-container: 760px;
+$mobile-width-container: 700px;
 $tablet-width-container: 1100px;
 $desktop-width-container: 1440px;
 

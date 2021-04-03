@@ -34,8 +34,12 @@
     </div>
     <div class="header__image-wrapper">
       <picture>
-        <source type="image/webp" srcset="img/header-photo-large.webp 1x, img/header-photo-large@2x.webp 2x">
-        <img class="header__image" src="img/header-photo-large.png" srcset="img/header-photo-large.png 1x, img/header-photo-large@2x.png 2x" alt="Лицо молодой девушки с атласной кожей">
+        <source media="(min-width: 1440px)" type="image/webp" srcset="img/header-photo-index-desktop.webp 1x, img/header-photo-index-desktop@2x.webp 2x">
+        <source media="(min-width: 1440px)" srcset="img/header-photo-index-desktop.png 1x, img/header-photo-index-desktop@2x.png 2x">
+        <source media="(min-width: 900px)" type="image/webp" srcset="img/header-photo-index-tablet.webp 1x, img/header-photo-index-tablet@2x.webp 2x">
+        <source media="(min-width: 900px)" srcset="img/header-photo-index-tablet.png 1x, img/header-photo-index-tablet@2x.png 2x">
+        <source type="image/webp" srcset="img/header-photo-index-mobile.webp 1x, img/header-photo-index-mobile@2x.webp 2x">
+        <img class="header__image" src="img/header-photo-index-mobile.png" srcset="img/header-photo-index-mobile@2x.png 2x" alt="Лицо молодой девушки с атласной кожей">
       </picture>
     </div>
     <div class="header__region-wrapper">

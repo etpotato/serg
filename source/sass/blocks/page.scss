@@ -11,3 +11,20 @@
 .page__footer {
   margin-top: auto;
 }
+
+@media (min-width: $tablet-width) {
+  .page__body--index {
+    background-repeat:
+      no-repeat,
+      no-repeat;
+    background-position:
+      top 480px left calc(50% - 115px),
+      top 545px left calc(50% + 950px);
+    background-size:
+      1523px,
+      945px;
+    background-image:
+      url("../img/main-index-background.svg"),
+      url("../img/main-index-background-tail.svg");
+  }
+}
