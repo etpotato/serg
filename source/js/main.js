@@ -2,7 +2,10 @@
 
 const navWrapper = document.querySelector('.header__nav-wrapper');
 const navToggle = navWrapper.querySelector('.header__nav-toggle');
-const navUnderlay = navWrapper.querySelector('.header__nav-underlay');
+
+const navUnderlay = document.createElement('div');
+navUnderlay.classList.add('header__nav-underlay');
+navWrapper.prepend(navUnderlay);
 
 const toggleMenu = (evt) => {
   evt.preventDefault();
