@@ -1,4 +1,17 @@
 .main {
   padding-top: 10px;
+  padding-bottom: 40px;
   overflow-x: hidden;
+}
+
+@media (min-width: $tablet-width) {
+  .main {
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: $desktop-width) {
+  .main {
+    padding-bottom: 100px;
+  }
 }

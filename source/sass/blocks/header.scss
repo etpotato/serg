@@ -117,9 +117,9 @@
       content: "";
       position: absolute;
       top: 0;
-      right: -100%;
-      width: 105%;
-      height: 100%;
+      right: calc(min(-20px, -1 * (100vw - 660px) / 2));
+      bottom: 0;
+      width: 30vw;
 
       background-color: $background-basic;
     }
@@ -130,6 +130,7 @@
   }
 
   .header__nav-list {
+    position: relative;
     display: flex;
   }
 }
