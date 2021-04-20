@@ -7,6 +7,8 @@
     "autoprefixer": "10.0.2",
     "browser-sync": "2.26.13",
     "del": "6.0.0",
+    "eslint": "7.18.0",
+    "eslint-config-htmlacademy": "2.0.0",
     "gulp": "4.0.2",
     "gulp-csso": "4.0.1",
     "gulp-htmlmin": "^5.0.1",
@@ -24,10 +26,8 @@
     "posthtml-include": "^1.6.0",
     "stylelint": "13.7.2",
     "stylelint-config-htmlacademy": "0.1.4",
-    "eslint": "7.18.0",
-    "eslint-config-htmlacademy": "2.0.0",
-    "webpack": "5.26.3",
-    "webpack-cli": "4.5.0"
+    "webpack-cli": "4.5.0",
+    "webpack-stream": "^6.1.2"
   },
   "scripts": {
     "editorconfig": "editorconfig-cli",

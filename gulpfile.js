@@ -13,6 +13,7 @@ const csso = require('gulp-csso');
 const gulpWebp = require('gulp-webp');
 const imagemin = require('gulp-imagemin');
 const svgStore = require('gulp-svgstore');
+const webpack = require('webpack-stream');
 const minifyJS = require('gulp-minify');
 const sync = require('browser-sync').create();
 
@@ -119,12 +120,13 @@ exports.sprite = sprite;
 // JS
 
 const js = () => {
-  return gulp.src('source/js/*.js')
-    .pipe(minifyJS({
-      ext: { min: '.min.js' },
-      noSource: true,
-      preserveComments: 'all'
-    }))
+  return gulp.src('source/js/main.js')
+    .pipe(webpack( require('./webpack.config.js') ))
+    // .pipe(minifyJS({
+    //   ext: { min: '.min.js' },
+    //   noSource: true,
+    //   preserveComments: 'all'
+    // }))
     .pipe(gulp.dest('build/js/'))
     .pipe(sync.stream());
 }
