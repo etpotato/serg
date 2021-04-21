@@ -36,13 +36,23 @@
   line-height: 25px;
 }
 
+.about__text-line {
+  white-space: nowrap;
+}
+
 .about__text-accent {
   color: $text-accent;
+  white-space: normal;
 }
+
 
 .about__text-description {
   display: block;
   font-size: 16px;
+}
+
+.about__text-description-line {
+  white-space: nowrap;
 }
 
 .about__wrapper--no-image {

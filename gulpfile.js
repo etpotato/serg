@@ -14,7 +14,6 @@ const gulpWebp = require('gulp-webp');
 const imagemin = require('gulp-imagemin');
 const svgStore = require('gulp-svgstore');
 const webpack = require('webpack-stream');
-const minifyJS = require('gulp-minify');
 const sync = require('browser-sync').create();
 
 // Clear
@@ -122,11 +121,6 @@ exports.sprite = sprite;
 const js = () => {
   return gulp.src('source/js/main.js')
     .pipe(webpack( require('./webpack.config.js') ))
-    // .pipe(minifyJS({
-    //   ext: { min: '.min.js' },
-    //   noSource: true,
-    //   preserveComments: 'all'
-    // }))
     .pipe(gulp.dest('build/js/'))
     .pipe(sync.stream());
 }

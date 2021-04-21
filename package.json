@@ -27,7 +27,7 @@
     "stylelint": "13.7.2",
     "stylelint-config-htmlacademy": "0.1.4",
     "webpack-cli": "4.5.0",
-    "webpack-stream": "^6.1.2"
+    "webpack-stream": "6.1.2"
   },
   "scripts": {
     "editorconfig": "editorconfig-cli",
@@ -54,5 +54,7 @@
   "engines": {
     "node": "14.15.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "validator": "13.6.0"
+  }
 }

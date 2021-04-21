@@ -19,12 +19,6 @@
   text-align: center;
 }
 
-.contact__form-label {
-  position: relative;
-  display: block;
-  padding-top: 28px;
-}
-
 .contact__form-label-text {
   position: absolute;
   top: 33px;
@@ -35,6 +29,16 @@
   color: $text-neutral;
   transition-duration: 300ms;
   cursor: text;
+}
+
+.contact__form-label-invalid {
+  position: absolute;
+  left: 0;
+  bottom: -22px;
+  display: block;
+  font-size: 12px;
+  line-height: 28px;
+  color: $text-invalid;
 }
 
 .contact__form-input {
@@ -54,10 +58,10 @@
   &::placeholder {
     color: transparent;
   }
-}
 
-.contact__form-label-invalid {
-  display: none;
+  &--invalid {
+    box-shadow: 0 2px 0 -1px $text-invalid;
+  }
 }
 
 .contact__form-input:focus {
@@ -66,12 +70,18 @@
 
 .contact__form-input:focus ~ .contact__form-label-text,
 .contact__form-input:not(:placeholder-shown) ~ .contact__form-label-text {
-  top: 8px;
+  top: 10px;
 
   font-size: 12px;
   line-height: 28px;
   font-weight: 600;
   color: $text-accent;
+}
+
+.contact__form-label {
+  position: relative;
+  display: block;
+  padding-top: 30px;
 }
 
 .contact__form-submit-wrapper {
@@ -81,9 +91,22 @@
   padding: 30px 45px;
 }
 
+.contact__form-consent {
+  order: 1;
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.contact__form-submitted {
+  display: none;
+}
+
 .contact__form-submit {
   margin-bottom: 20px;
-  padding: 14px 49px 16px 48px;
+  padding: 14px 15px 16px 15px;
+  width: 210px;
   border: 1px solid $text-accent;
   border-radius: 100px;
   font-size: 20px;
@@ -111,24 +134,16 @@
     background-color: $background-basic;
     color: $text-basic;
 
-    & ~ .contact__form-submitted {
-      display: block;
+    &:hover,
+    &:focus {
+      border-color: $text-accent;
+      background-color: $background-basic;
+    }
+
+    &:active {
+      background-color: $background-basic;
     }
   }
-}
-
-.contact__form-consent {
-  order: 1;
-  display: block;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-}
-
-.contact__form-submitted {
-  display: none;
-  margin-top: 0;
-  margin-bottom: 20px;
 }
 
 .contact__contacts-link {
@@ -156,6 +171,10 @@
   }
 }
 
+.contact__contacts-description-line {
+  white-space: nowrap;
+}
+
 @media (min-width: $tablet-width) {
   .contact {
     padding-top: 0;
@@ -177,7 +196,7 @@
 
   .contact__form {
     flex: 0 0 calc(50% - 15px);
-    margin-right: 90px;
+    margin-right: 80px;
   }
 
   .contact__form-input {
@@ -188,15 +207,30 @@
     }
   }
 
+  .contact__form-label {
+    padding-top: 32px;
+  }
+
+  .contact__form-input:focus ~ .contact__form-label-text,
+  .contact__form-input:not(:placeholder-shown) ~ .contact__form-label-text {
+    top: 12px;
+  }
+
   .contact__form-label-text {
     font-size: 18px;
   }
 
+  .contact__form-label-invalid {
+    bottom: -24px;
+    font-size: 14px;
+  }
+
   .contact__form-submit-wrapper {
+    position: relative;
     flex-direction: row;
     justify-content: space-between;
     padding-right: 0;
-    padding-bottom: 45px;
+    padding-bottom: 55px;
     padding-left: 0;
   }
 
@@ -209,6 +243,17 @@
 
   .contact__form-submit {
     margin-bottom: 0;
+
+    &--success ~ .contact__form-submitted {
+      display: block;
+      position: absolute;
+      right: 30px;
+      bottom: 0;
+      max-width: 150px;
+      font-size: 14px;
+      line-height: 19px;
+      text-align: center;
+    }
   }
 
   .contact__contacts {
@@ -219,6 +264,7 @@
     justify-content: flex-start;
     font-size: 40px;
     line-height: 54px;
+    text-align: left;
 
     &--font-small {
       font-size: 30px;
