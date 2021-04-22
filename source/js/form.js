@@ -1,12 +1,9 @@
 import { sendData } from './api.js';
 import isEmail from 'validator/es/lib/isEmail';
-import isMobilePhone from 'validator/es/lib/isMobilePhone';
 
-const ErrorMessages = {
-  NAME: 'Пожалуйста, представьтесь',
-  ADDRESS: 'Пожалуйста, оставьте свои контакты',
-  MESSAGE: 'Пожалуйста, опишите что вас беспокоит',
-};
+const PHONE_REGEX = /^(\+7|7|8)?[\s-]?\(?[489][0-9]{2}\)?[\s-]?[0-9]{2}[\s-]?([0-9][\s-]?){3}[0-9]{2}$/;
+const ERROR_TIMEOUT = 5000;
+const ERROR_MESSAGE = 'Ошибка отправки данных. Попробуйте еще раз.';
 const ButtonTexts = {
   DEFAULT: 'Отправить',
   SUCCESS: 'Отправлено!',
@@ -23,31 +20,12 @@ const submitButton = submitWrapper.querySelector('.contact__form-submit');
 
 // валидация
 const showInputInvalid = (input) => {
+  input.classList.add('contact__form-input--invalid');
   const message = document.createElement('span');
   message.classList.add('contact__form-label-invalid');
-  input.classList.add('contact__form-input--invalid');
-  return message;
+  message.textContent = input.dataset.error;
+  input.parentNode.append(message);
 }
-
-const showNameInvalid = () => {
-  const message = showInputInvalid(nameInput);
-  message.textContent = ErrorMessages.NAME;
-  nameInput.parentNode.append(message);
-};
-
-const showAddressInvalid = () => {
-  const message = showInputInvalid(addressInput);
-  message.textContent = ErrorMessages.ADDRESS;
-  addressInput.parentNode.append(message);
-}
-
-const showMessageInvalid = () => {
-  const message = showInputInvalid(messageInput);
-  message.textContent = ErrorMessages.MESSAGE;
-  messageInput.parentNode.append(message);
-}
-
-// console.log(nameInput.parentElement.querySelector('.contact__form-label-invalid'));
 
 const hideInputInvalid = (input) => {
   const message = input.parentNode.querySelector('.contact__form-label-invalid');
@@ -58,37 +36,40 @@ const hideInputInvalid = (input) => {
 };
 
 const validateName = () => {
-  if (nameInput.value === '') {
+  const value = nameInput.value;
+  if (value === '') {
     return false;
   }
 
-  const isValid = nameInput.value.trim() !== '';
+  const isValid = value.trim() !== '';
 
-  isValid ? hideInputInvalid(nameInput) : showNameInvalid();
+  isValid ? hideInputInvalid(nameInput) : showInputInvalid(nameInput);
 
   return isValid;
 };
 
 const validateAddress = () => {
-  if (addressInput.value === '') {
+  const value = addressInput.value;
+  if (value === '') {
     return false;
   }
 
-  const isValid = isEmail(addressInput.value) || isMobilePhone(addressInput.value, 'any');
+  const isValid = isEmail(value) || PHONE_REGEX.test(value.trim());
 
-  isValid ? hideInputInvalid(addressInput) : showAddressInvalid();
+  isValid ? hideInputInvalid(addressInput) : showInputInvalid(addressInput);
 
   return isValid;
 };
 
 const validateMessage = () => {
-  if (messageInput.value === '') {
+  const value = messageInput.value;
+  if (value === '') {
     return false;
   }
 
-  const isValid = messageInput.value.trim() !== '';
+  const isValid = value.trim() !== '';
 
-  isValid ? hideInputInvalid(messageInput) : showMessageInvalid();
+  isValid ? hideInputInvalid(messageInput) : showInputInvalid(messageInput);
 
   return isValid;
 };
@@ -135,29 +116,34 @@ const onSuccessSubmit = (responce) => {
   form.reset();
   submitButton.disabled = true;
   form.addEventListener('click', onRepeatedFormClick);
-
   responce.text().then((text) => {
     const tab = window.open();
     tab.document.write(text);
   });
-  // Мы свяжемся с вами в ближайшее время
-// Очистить форму
 };
 
 const onErrorSubmit = () => {
-  // console.log('Произошла ошыбка');
-// сохранение в localStorage???
-// При отправке данных на сервер произошла ошибка.
+  const errorMessage = document.createElement('p');
+  errorMessage.classList.add('contact__form-submit-error');
+  errorMessage.textContent = ERROR_MESSAGE;
+  form.append(errorMessage);
+
+  setTimeout(() => {
+    errorMessage.remove();
+  }, ERROR_TIMEOUT);
 };
 
 const onSubmit = (evt) => {
   evt.preventDefault();
   submitButton.blur();
-  validateForm() ? (
+  if (validateForm()) {
     sendData(new FormData(evt.target), onSuccessSubmit, onErrorSubmit)
-  ) : (
-    form.querySelector('.contact__form-input--invalid').focus()
-  );
+  } else {
+    const emptyInputs = Array.from(form.querySelectorAll('input:placeholder-shown'));
+    emptyInputs.forEach(input => showInputInvalid(input));
+    form.querySelector('.contact__form-input--invalid').focus();
+  }
+
 };
 
 inputs.forEach(input => input.required = false);

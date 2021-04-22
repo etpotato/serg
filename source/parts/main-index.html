@@ -56,17 +56,17 @@
       <div class="contact__wrapper">
         <form class="contact__form" action="https://echo.htmlacademy.ru/courses" method="POST">
           <label class="contact__form-label">
-            <input class="contact__form-input" id="contact-name" type="text" name="contact-name" placeholder="ФИО" required>
+            <input class="contact__form-input" id="contact-name" type="text" name="contact-name" data-error="Пожалуйста, представьтесь" placeholder="ФИО" required>
             <span class="contact__form-label-text">ФИО</span>
             <!-- <span class="contact__form-label-invalid">Пожалуйста представьтесь</span> -->
           </label>
           <label class="contact__form-label">
-            <input class="contact__form-input contact__form-input--width-small" id="contact-address" type="text" name="contact-address" placeholder="Телефон или электронная почта" required>
+            <input class="contact__form-input contact__form-input--width-small" id="contact-address" type="text" name="contact-address" data-error="Пожалуйста, оставьте свои контакты" placeholder="Телефон или электронная почта" required>
             <span class="contact__form-label-text">Телефон или&nbsp;электронная почта</span>
             <!-- <span class="contact__form-label-invalid">Пожалуйста оставьте свои контакты</span> -->
           </label>
           <label class="contact__form-label">
-            <textarea class="contact__form-input" id="contact-message" name="contact-message" rows="2" placeholder="Ваше сообщение" required></textarea>
+            <textarea class="contact__form-input" id="contact-message" name="contact-message" data-error="Пожалуйста, опишите что вас беспокоит" rows="2" placeholder="Ваше сообщение" required></textarea>
             <span class="contact__form-label-text">Ваше сообщение</span>
             <!-- <span class="contact__form-label-invalid">Пожалуйста, опишите что вас беспокоит</span> -->
           </label>
@@ -74,6 +74,7 @@
             <small class="contact__form-consent">Нажимая на&nbsp;кнопку, вы&nbsp;даёте своё согласие на&nbsp;обработку персональных данных.</small>
             <button class="contact__form-submit contact__form-submit--submitted" type="submit">Отправить</button>
           </div>
+          <!-- <p class="contact__form-submit-error">Ошибка отправки данных. Попробуйте еще раз.</p> -->
         </form>
         <div class="contact__contacts">
           <a class="contact__contacts-link" href="tel:84991165399">+7 (499) 116-53-99</a>

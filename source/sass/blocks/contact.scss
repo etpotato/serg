@@ -146,6 +146,26 @@
   }
 }
 
+.contact__form-submit-error {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  margin: 0;
+  padding: 15px 40px 30px 40px;
+  color: $text-contrast;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 0 3px $text-basic;
+  background-color: crimson;
+  z-index: 100;
+  border-bottom-style: none;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
 .contact__contacts-link {
   display: flex;
   flex-wrap: wrap;

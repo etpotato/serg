@@ -24,6 +24,7 @@
       right: 0;
       bottom: 0;
       left: 0;
+      pointer-events: none;
     }
 
     &::before {
@@ -46,7 +47,6 @@
       background-image:
         url("../img/main-index-background-line.svg"),
         url("../img/main-index-background-tail.svg");
-      pointer-events: none;
     }
 
     .page__header,
