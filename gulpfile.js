@@ -119,7 +119,7 @@ exports.sprite = sprite;
 // JS
 
 const js = () => {
-  return gulp.src('source/js/main.js')
+  return gulp.src('source/js/*.js')
     .pipe(webpack( require('./webpack.config.js') ))
     .pipe(gulp.dest('build/js/'))
     .pipe(sync.stream());

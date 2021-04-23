@@ -1,8 +1,13 @@
 module.exports = {
   mode: 'development',
-  entry: './source/js/main.js',
+  entry: {
+    index: ['./source/js/menu.js', './source/js/form.js'],
+    procedure: ['./source/js/menu.js', './source/js/form.js'],
+    contact: './source/js/menu.js',
+    blank: './source/js/menu.js',
+  },
   devtool: 'source-map',
   output: {
-    filename: 'main.bundle.js',
+    filename: '[name].bundle.js',
   },
 };

@@ -1,16 +1,222 @@
 <!DOCTYPE html>
 <html class="page" lang="ru">
   <head>
+    <title>Алег Сысоев - пластический хирург. Главная страница.</title>
     <include src="source/main-chank/head.html"></include>
   </head>
   <body class="page__body page__body--index">
-    <include src="source/parts/header-index.html"></include>
-
-    <include src="source/parts/main-index.html"></include>
-
-    <include src="source/parts/footer.html"></include>
-
-    <!-- <script src="js/swiper.min.js"></script> -->
-    <include src="source/main-chank/script.html"></include>
+    <header class="header page__header header--index">
+      <div class="container">
+        <div class="header__top-wrapper">
+          <a class="header__logo logo logo--extended">
+            <img class="logo__image" src="img/logo.svg" width="30" height="36" alt="Aleg Sysoev">
+            <span class="logo__name">Алег Сысоев</span>
+            <span class="logo__text">пластический хирург</span>
+          </a>
+          <div class="header__nav-wrapper header__nav-wrapper--no-js">
+            <nav class="header__nav">
+              <button class="header__nav-toggle" aria-controls="header__nav-list" aria-expanded="false">
+                <span class="visually-hidden">Меню</span>
+              </button>
+              <ul class="header__nav-list" id="header__nav-list">
+                <li class="header__nav-item">
+                  <a class="header__nav-link header__nav-link--inactive" href="blank.html">Доктор</a>
+                </li>
+                <li class="header__nav-item">
+                  <a class="header__nav-link header__nav-link--inactive" href="blank.html">Новости</a>
+                </li>
+                <li class="header__nav-item">
+                  <a class="header__nav-link header__nav-link--inactive" href="blank.html">Клиника</a>
+                </li>
+                <li class="header__nav-item">
+                  <a class="header__nav-link" href="procedure.html">Операция</a>
+                </li>
+                <li class="header__nav-item">
+                  <a class="header__nav-link" href="contact.html">Контакты</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="header__image-wrapper">
+          <picture>
+            <source media="(min-width: 1440px)" type="image/webp" srcset="img/header-photo-index-desktop.webp 1x, img/header-photo-index-desktop@2x.webp 2x">
+            <source media="(min-width: 1440px)" srcset="img/header-photo-index-desktop.png 1x, img/header-photo-index-desktop@2x.png 2x">
+            <source media="(min-width: 900px)" type="image/webp" srcset="img/header-photo-index-tablet.webp 1x, img/header-photo-index-tablet@2x.webp 2x">
+            <source media="(min-width: 900px)" srcset="img/header-photo-index-tablet.png 1x, img/header-photo-index-tablet@2x.png 2x">
+            <source type="image/webp" srcset="img/header-photo-index-mobile.webp 1x, img/header-photo-index-mobile@2x.webp 2x">
+            <img class="header__image" src="img/header-photo-index-mobile.png" srcset="img/header-photo-index-mobile@2x.png 2x" alt="Лицо молодой девушки с атласной кожей">
+          </picture>
+        </div>
+        <div class="header__region-wrapper">
+          <p class="header__region-text">Что бы вы&nbsp;хотели в&nbsp;себе изменить?</p>
+          <ul class="header__region-list">
+            <li class="header__region-item">
+              <a class="header__region-link header__region-link--face header__region-link--current" href="procedure.html#face">Лицо и&nbsp;шея</a>
+            </li>
+            <li class="header__region-item">
+              <a class="header__region-link header__region-link--breasts" href="procedure.html#breasts">Грудь</a>
+            </li>
+            <li class="header__region-item">
+              <a class="header__region-link header__region-link--upperbody" href="procedure.html#upperbody">Верх&nbsp;тела</a>
+            </li>
+            <li class="header__region-item">
+              <a class="header__region-link header__region-link--lowerbody" href="procedure.html#lowerbody">Низ&nbsp;тела</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="page__main main main--index">
+      <div class="container">
+        <h1 class="visually-hidden">Пластический хирург Сысоев Алег Евгеньевич.</h1>
+        <section class="about">
+          <h2 class="visually-hidden">О докторе</h2>
+          <div class="about__wrapper">
+            <picture>
+              <source media="(min-width: 1440px)" type="image/webp" srcset="img/about-1-desktop.webp 1x, img/about-1-desktop@2x.webp 2x">
+              <source media="(min-width: 1440px)" srcset="img/about-1-desktop.png 1x, img/about-1-desktop@2x.png 2x">
+              <source media="(min-width: 900px)" type="image/webp" srcset="img/about-1-tablet.webp 1x, img/about-1-tablet@2x.webp 2x">
+              <source media="(min-width: 900px)" srcset="img/about-1-tablet.png 1x, img/about-1-tablet@2x.png 2x">
+              <source type="image/webp" srcset="img/about-1-mobile.webp 1x, img/about-1-mobile@2x.webp 2x">
+              <img class="about__image" src="img/about-1-mobile.png" srcset="img/about-1-mobile.png@2x 2x" alt="Фотография доктора Сысоева">
+            </picture>
+            <p class="about__text">
+              <b class="about__text-lead">Внимательный к&nbsp;пациентам&ensp;
+                <br class="about__mobile-break">
+                <span class="about__text-accent">доктор</span>,
+              </b>
+              <span class="about__text-description">
+                <span class="about__text-description-line">Сысоев Алег Евгеньевич,</span>
+                <span class="about__text-description-line">к.м.н., пластический хирург,</span>
+                <span class="about__text-description-line">врач с десятилетним стажем.</span>
+              </span>
+            </p>
+          </div>
+          <div class="about__wrapper about__wrapper--flow-reverse">
+            <picture>
+              <source media="(min-width: 900px)" type="image/webp" srcset="img/about-2-tablet.webp 1x, img/about-2-tablet@2x.webp 2x">
+              <source media="(min-width: 900px)" srcset="img/about-2-tablet.png 1x, img/about-2-tablet@2x.png 2x">
+              <source type="image/webp" srcset="img/about-2-mobile.webp 1x, img/about-2-mobile@2x.webp 2x">
+              <img class="about__image about__image--out-of-view about__image--large" src="img/about-2-mobile.png" srcset="img/about-2-mobile@2x.png 2x" alt="Стойка информации Topclinic с логотипом на стене">
+            </picture>
+            <p class="about__text about__text--padding-top">
+              <b class="about__text-lead">работающий
+                <span class="about__text-line">в
+                  <span class="about__text-accent">современной клинике</span>,
+                </span>
+              </b>
+              <span class="about__text-description">Hiphopclinic оснащена в&nbsp;соответствии с&nbsp;самыми высокими медицинскими стандартами, имет полный спектр специалистов и&nbsp;находится в&nbsp;самом сердце Москвы.</span>
+            </p>
+          </div>
+          <div class="about__wrapper about__wrapper--no-image">
+            <p class="about__text">
+              <b class="about__text-lead">способен достичь
+                <span class="about__text-accent">превосходных&nbsp;результатов</span>.
+              </b>
+              <span class="about__text-description">Более 300 счастливых пациентов, 2000 проведеных операций и&nbsp;десятки тысяч часов обучения и&nbsp;тренировок.</span>
+            </p>
+          </div>
+        </section>
+        <section class="contact">
+          <h2 class="visually-hidden">Контакты</h2>
+          <p class="contact__lead">Для&nbsp;первого шага к&nbsp;красоте достаточно всего нескольких&nbsp;слов</p>
+          <p class="contact__text">Позвоните или&nbsp;напишите, чтобы задать вопрос или&nbsp;записаться на&nbsp;консультацию.</p>
+          <div class="contact__wrapper">
+            <form class="contact__form" action="https://echo.htmlacademy.ru/courses" method="POST">
+              <label class="contact__form-label">
+                <input class="contact__form-input" id="contact-name" type="text" name="contact-name" data-error="Пожалуйста, представьтесь" placeholder="ФИО" required>
+                <span class="contact__form-label-text">ФИО</span>
+              </label>
+              <label class="contact__form-label">
+                <input class="contact__form-input contact__form-input--width-small" id="contact-address" type="text" name="contact-address" data-error="Пожалуйста, оставьте свои контакты" placeholder="Телефон или электронная почта" required>
+                <span class="contact__form-label-text">Телефон или&nbsp;электронная почта</span>
+              </label>
+              <label class="contact__form-label">
+                <textarea class="contact__form-input" id="contact-message" name="contact-message" data-error="Пожалуйста, опишите что вас беспокоит" rows="2" placeholder="Ваше сообщение" required></textarea>
+                <span class="contact__form-label-text">Ваше сообщение</span>
+              </label>
+              <div class="contact__form-submit-wrapper">
+                <small class="contact__form-consent">Нажимая на&nbsp;кнопку, вы&nbsp;даёте своё согласие на&nbsp;обработку персональных данных.</small>
+                <button class="contact__form-submit contact__form-submit--submitted" type="submit">Отправить</button>
+              </div>
+            </form>
+            <div class="contact__address address">
+              <a class="address__link" href="tel:89856237122">+7 (985) 623-71-22</a>
+              <p class="address__description">Телефон Hiphopclinic. Ежедневно <span class="address__description-line">с 8:30 до 20:00</span></p>
+              <a class="address__link address__link--font-small" href="mailto:wealthydoc@gmail.com">
+                <span>wealthydoc</span>
+                <span>@gmail.com</span>
+              </a>
+              <p class="address__description">Почта доктора Сысоева</p>
+            </div>
+          </div>
+        </section>
+        <section class="news">
+          <h2 class="visually-hidden">Новости</h2>
+          <ul class="news__list">
+            <li class="news__item">
+              <a class="news__item-link" href="blank.html">
+                <h3 class="news__item-title">Ринопластика не&nbsp;для&nbsp;суеверных</h3>
+              </a>
+              <p class="news__item-text">Мероприятие провёл и&nbsp;поделился своим опытом один из&nbsp;лучших хирургов в&nbsp;области реконструктивной и&nbsp;пластической хирургии Профессор Виссарионов Владимир Алексеевич.</p>
+            </li>
+            <li class="news__item">
+              <a class="news__item-link" href="blank.html">
+                <h3 class="news__item-title" lang="en">ХIV Cadaver Class</h3>
+              </a>
+              <p class="news__item-text">Пройдет 23&nbsp;сентября в&nbsp;стенах РНИМУ им.&nbsp;Н.И.Пирогова в&nbsp;учебном центре инновационных медицинских технологий&nbsp;(УЦИМТ). Все новинки в&nbsp;индустрии инъекционных методик.</p>
+            </li>
+            <li class="news__item">
+              <a class="news__item-link" href="blank.html">
+                <h3 class="news__item-title">Диссекционный курс для&nbsp;косметологов</h3>
+              </a>
+              <p class="news__item-text">Был проведен на&nbsp;кафедре оперативной хирургии и&nbsp;топографической анатомии Первого МГМУ им. И.М.&nbsp;Сеченова. «Скин&nbsp;Технолоджи» и&nbsp;Cadaver Classs собрали 1,5&nbsp;м<sup>2</sup> избыточной кожи.</p>
+            </li>
+          </ul>
+          <a class="news__link" href="blank.html">читать предыдущие новости</a>
+        </section>
+      </div>
+    </main>
+    <footer class="footer page__footer container">
+      <a class="footer__logo logo logo--extended">
+        <img class="logo__image" src="img/logo.svg" width="30" height="36" alt="Aleg Sysoev">
+        <span class="logo__name">Алег Сысоев</span>
+        <span class="logo__text">пластический хирург</span>
+      </a>
+      <ul class="footer__nav-list">
+        <li class="footer__nav-item">
+          <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Доктор</a>
+        </li>
+        <li class="footer__nav-item">
+          <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Новости</a>
+        </li>
+        <li class="footer__nav-item">
+          <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Клиника</a>
+        </li>
+        <li class="footer__nav-item">
+          <a class="footer__nav-link" href="procedure.html">Операция</a>
+        </li>
+        <li class="footer__nav-item">
+          <a class="footer__nav-link" href="contact.html">Контакты</a>
+        </li>
+        <li class="footer__nav-item">
+          <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Политика конфиденциальности</a>
+        </li>
+      </ul>
+      <ul class="footer__social social">
+        <li class="social__item">
+          <a class="social__link social__link--facebook" href="https://www.facebook.com">
+            <span class="visually-hidden">Фейсбук</span>
+          </a>
+        </li>
+        <li class="social__item">
+          <a class="social__link social__link--instagram" href="https://www.instagram.com">
+            <span class="visually-hidden">Инстаграм</span>
+          </a>
+        </li>
+      </ul>
+    </footer>
+    <script src="js/index.bundle.js"></script>
   </body>
 </html>

@@ -25,50 +25,11 @@
   color: $text-basic;
   text-decoration: none;
   outline-offset: 4px;
-}
 
-.footer__social-list {
-  @include reset-list;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  margin-right: -14px;
-  margin-bottom: -14px;
-}
-
-.footer__social-item {
-  margin-right: 14px;
-  margin-bottom: 14px;
-}
-
-.footer__social-link {
-  display: block;
-  width: 50px;
-  height: 50px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  outline-offset: 4px;
-  transition-property: transform filter;
-  transition-timing-function: ease-in;
-  transition-duration: 200ms;
-
-  &--facebook {
-    background-image: url("../img/icon-facebook.svg");
-  }
-
-  &--instagram {
-    background-image: url("../img/icon-instagram.svg");
-  }
-
-  &:hover,
-  &:focus {
-    transform: scale(1.1);
-    filter: brightness(0.9);
+  &--inactive {
+    opacity: 0.3;
   }
 }
-
 
 @media (min-width: $tablet-width) {
   .footer {

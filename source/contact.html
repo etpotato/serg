@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="page" lang="ru">
   <head>
-    <title>Алег Сысоев, пластический хирург. Перечень услуг.</title>
+    <title>Алег Сысоев. Контакты</title>
     <include src="source/main-chank/head.html"></include>
   </head>
   <body class="page__body">
@@ -29,10 +29,10 @@
                   <a class="header__nav-link header__nav-link--inactive" href="blank.html">Клиника</a>
                 </li>
                 <li class="header__nav-item">
-                  <a class="header__nav-link header__nav-link--current">Операция</a>
+                  <a class="header__nav-link" href="procedure.html">Операция</a>
                 </li>
                 <li class="header__nav-item">
-                  <a class="header__nav-link" href="contact.html">Контакты</a>
+                  <a class="header__nav-link header__nav-link--current">Контакты</a>
                 </li>
               </ul>
             </nav>
@@ -40,8 +40,8 @@
         </div>
         <div class="header__image-wrapper">
           <picture>
-            <source type="image/webp" srcset="img/header-photo.webp 1x, img/header-photo@2x.webp 2x">
-            <img class="header__image" src="img/header-photo.png" srcset="img/header-photo@2x.png 2x" alt="Руки хирурга осторожно касаются лица девушки">
+            <source type="image/webp" srcset="img/header-photo-contact.webp 1x, img/header-photo-contact@2x.webp 2x">
+            <img class="header__image" src="img/header-photo-contact.png" srcset="img/header-photo-contact@2x.png 2x" alt="Руки хирурга осторожно касаются лица девушки">
           </picture>
         </div>
         <div class="header__region-wrapper">
@@ -62,9 +62,48 @@
         </div>
       </div>
     </header>
-
-    <include src="./source/parts/main-procedure.html"></include>
-
+    <main class="page__main main">
+      <h1 class="visually-hidden">Контакты доктора Сысоева</h1>
+      <div class="container">
+        <div class="reach">
+          <div class="reach__text">
+            <div class="reach__address address address--contact">
+              <a class="address__link" href="tel:89856237122">+7 (985) 623-71-22</a>
+              <p class="address__description">Телефон Hiphopclinic.
+                <br>Ежедневно
+                <span class="address__description-line">с 8:30 до 20:00</span>
+              </p>
+            </div>
+            <div class="reach__address address address--contact">
+              <a class="address__link address__link--font-small" href="mailto:wealthydoc@gmail.com">
+                <span>wealthydoc</span>
+                <span>@gmail.com</span>
+              </a>
+              <p class="address__description">Почта доктора Сысоева</p>
+            </div>
+            <ul class="reach__social social">
+              <li class="social__item">
+                <a class="social__link social__link--facebook" href="https://www.facebook.com">
+                  <span class="visually-hidden">Фейсбук</span>
+                </a>
+              </li>
+              <li class="social__item">
+                <a class="social__link social__link--instagram" href="https://www.instagram.com">
+                  <span class="visually-hidden">Инстаграм</span>
+                </a>
+              </li>
+            </ul>
+            <div class="reach__address address address--contact">
+              <a class="address__link">Hiphopclinic</a>
+              <p class="address__description">Москва, Большая Грузинская, 1</p>
+            </div>
+          </div>
+          <div class="reach__map-wrapper">
+            <iframe class="reach__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20393.470665408062!2d37.56408659120133!3d55.76449086429295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a319a6b7151%3A0x124c632d82c0e8ab!2z0JEuINCT0YDRg9C30LjQvdGB0LrQsNGPINGD0LsuLCAxLCDQnNC-0YHQutCy0LAsIDEyMzI0Mg!5e0!3m2!1sru!2sru!4v1619180692287!5m2!1sru!2sru" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </main>
     <footer class="footer page__footer container">
       <a class="footer__logo logo logo--extended" href="index.html">
         <img class="logo__image" src="img/logo.svg" width="30" height="36" alt="Aleg Sysoev">
@@ -82,10 +121,10 @@
           <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Клиника</a>
         </li>
         <li class="footer__nav-item">
-          <a class="footer__nav-link">Операция</a>
+          <a class="footer__nav-link" href="procedure.html">Операция</a>
         </li>
         <li class="footer__nav-item">
-          <a class="footer__nav-link" href="contact.html">Контакты</a>
+          <a class="footer__nav-link">Контакты</a>
         </li>
         <li class="footer__nav-item">
           <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Политика конфиденциальности</a>
@@ -104,6 +143,6 @@
         </li>
       </ul>
     </footer>
-    <script src="js/procedure.bundle.js"></script>
+    <script src="js/contact.bundle.js"></script>
   </body>
 </html>

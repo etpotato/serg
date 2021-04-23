@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="page" lang="ru">
   <head>
-    <title>Алег Сысоев, пластический хирург. Перечень услуг.</title>
+    <title>Пустая страница.</title>
     <include src="source/main-chank/head.html"></include>
   </head>
   <body class="page__body">
@@ -29,7 +29,7 @@
                   <a class="header__nav-link header__nav-link--inactive" href="blank.html">Клиника</a>
                 </li>
                 <li class="header__nav-item">
-                  <a class="header__nav-link header__nav-link--current">Операция</a>
+                  <a class="header__nav-link" href="procedure.html">Операция</a>
                 </li>
                 <li class="header__nav-item">
                   <a class="header__nav-link" href="contact.html">Контакты</a>
@@ -63,7 +63,12 @@
       </div>
     </header>
 
-    <include src="./source/parts/main-procedure.html"></include>
+    <main class="page__main main">
+      <div class="blank">
+        <p class="blank__text">Данной страницы пока не существует.</p>
+        <a class="blank__link" href="">Вернуться назад</a>
+      </div>
+    </main>
 
     <footer class="footer page__footer container">
       <a class="footer__logo logo logo--extended" href="index.html">
@@ -82,7 +87,7 @@
           <a class="footer__nav-link footer__nav-link--inactive" href="blank.html">Клиника</a>
         </li>
         <li class="footer__nav-item">
-          <a class="footer__nav-link">Операция</a>
+          <a class="footer__nav-link" href="procedure.html">Операция</a>
         </li>
         <li class="footer__nav-item">
           <a class="footer__nav-link" href="contact.html">Контакты</a>
@@ -104,6 +109,6 @@
         </li>
       </ul>
     </footer>
-    <script src="js/procedure.bundle.js"></script>
+    <script src="js/blank.bundle.js"></script>
   </body>
 </html>
