@@ -20,7 +20,13 @@ const submitButton = submitWrapper.querySelector('.contact__form-submit');
 
 // валидация
 const showInputInvalid = (input) => {
+  const invalidMessage = input.parentElement.querySelector('.contact__form-label-invalid');
   input.classList.add('contact__form-input--invalid');
+
+  if (invalidMessage) {
+    return;
+  }
+
   const message = document.createElement('span');
   message.classList.add('contact__form-label-invalid');
   message.textContent = input.dataset.error;

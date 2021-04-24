@@ -1,3 +1,7 @@
+.procedure {
+  padding-bottom: 40px;
+}
+
 .procedure__nav {
   margin-bottom: 40px;
 }
@@ -56,10 +60,37 @@
   color: $text-basic;
   text-decoration: none;
 
+  &:hover,
+  &:focus {
+    outline: none;
+    color: $text-basic;
+    border-color: $border-basic;
+    background-color: $border-basic;
+  }
+
   &--current {
     color: $text-contrast;
     background-color: $text-accent;
     border-color: $text-accent;
+
+    &:hover,
+    &:focus {
+      color: $text-contrast;
+      background-color: $text-accent;
+      border-color: $text-accent;
+    }
+  }
+}
+
+.procedure__price {
+  min-height: 900px;
+}
+
+.procedure__section {
+  display: none;
+
+  &--current {
+    display: block;
   }
 }
 
@@ -130,6 +161,10 @@
 }
 
 .procedure--no-js {
+  .procedure__section {
+    display: block;
+  }
+
   .procedure__section-title {
     position: static;
     width: auto;
@@ -151,12 +186,12 @@
   .procedure {
     display: flex;
     padding-top: 70px;
+    padding-bottom: 70px;
   }
 
   .procedure__nav {
     margin-right: 40px;
-    width: 40%;
-    max-width: 340px;
+    flex: 0 0 340px;
   }
 
   .procedure__nav-lead {
@@ -182,6 +217,7 @@
   .procedure__price {
     flex: 1 1 auto;
     padding-top: 6px;
+    min-height: 600px;
   }
 
   .procedure__lead {
@@ -214,11 +250,12 @@
   }
 
   .procedure__data {
-    margin-right: 10px;
+    margin-right: 20px;
     margin-bottom: 0;
 
     &:last-child {
       margin-right: 0;
+      white-space: nowrap;
     }
   }
 
@@ -230,6 +267,10 @@
 }
 
 @media (min-width: $desktop-width) {
+  .procedure__price {
+    min-height: 580px;
+  }
+
   .procedure__nav {
     margin-right: 76px;
   }

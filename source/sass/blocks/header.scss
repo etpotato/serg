@@ -210,6 +210,11 @@
   text-decoration: none;
   text-align: center;
 
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+
   &::before {
     content: "";
     width: 73px;

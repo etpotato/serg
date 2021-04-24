@@ -1,7 +1,7 @@
 <main class="page__main main">
   <h1 class="visually-hidden">Оперативные вмешательства и косметические процедуры</h1>
   <div class="container">
-    <section class="procedure procedure--no-js">
+    <section class="procedure">
       <h2 class="visually-hidden">Варианты операций по локализации</h2>
       <div class="procedure__nav">
         <p class="procedure__nav-lead">Что именно вас беспокоит?</p>
@@ -153,7 +153,7 @@
             </table>
           </section>
         </section>
-        <section class="procedure__section" id="face">
+        <section class="procedure__section procedure__section--current" id="face">
           <h3 class="procedure__section-title">Коррекция лица</h3>
           <p class="procedure__lead">Возможные решения вашей проблемы:</p>
           <section class="procedure__type-section">
@@ -385,12 +385,14 @@
     </section>
     <section class="results">
       <h2 class="results__title">Примеры работ:</h2>
-      <button class="results__swipe results__swipe--prev">
-        <span class="visually-hidden">Предыдущий пример</span>
-      </button>
-      <button class="results__swipe results__swipe--next">
-        <span class="visually-hidden">Следующий пример</span>
-      </button>
+      <div class="results__swipe-wrapper">
+        <button class="results__swipe results__swipe--prev">
+          <span class="visually-hidden">Предыдущий пример</span>
+        </button>
+        <button class="results__swipe results__swipe--next">
+          <span class="visually-hidden">Следующий пример</span>
+        </button>
+      </div>
       <ul class="result__pagination-list">
         <li class="results__pagination-item">
           <a class="results__pagination-link" href="#result-1">
@@ -420,14 +422,14 @@
             </p>
           </div>
         </li>
-        <li class="results__item" id="result-1">
+        <li class="results__item" id="result-2">
           <img class="results__image" src="img/results-2.jpg" alt="Фотографии мужчины до и после операции">
           <div class="results__text">
             <p class="results__paragraph">
-              <b class="results__lead">Проблема.</b> Пациента беспокоили выраженные носогубные складки, особенно сильно выделявшиеся при разговоре с очаровательными дамами. Подобные проблемы вызваны несоблюдением режима сна и бодрствования, а так же мемной недостаточностью.
+              <b class="results__lead">Проблема.</b> Пациента беспокоили выраженные носогубные складки, особенно сильно выделявшиеся при разговоре с очаровательными дамами. Подобные проблемы вызваны несоблюдением режима сна и бодрствования, а так же обезвоживанием.
             </p>
             <p class="results__paragraph">
-              <b class="results__lead">Решение.</b> Выполнена фациоскопическая мематизация носогубно-лицевой фасции. Обратите внимание, как красиво падает свет на лицо на фотографии справа. Фотограф знает свое дело.
+              <b class="results__lead">Решение.</b> Выполнена фациоскопическая пневматизация носогубно-лицевой фасции. Обратите внимание, как красиво падает свет на лицо на фотографии слева.
             </p>
           </div>
         </li>
