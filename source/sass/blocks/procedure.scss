@@ -1,5 +1,27 @@
 .procedure {
+  overflow-anchor: none;
   padding-bottom: 40px;
+}
+
+.procedure__unit {
+  display: none;
+
+  &--current {
+    display: block;
+  }
+}
+
+.procedure__unit-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  border: 0;
+
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 
 .procedure__nav {
@@ -60,7 +82,6 @@
   color: $text-basic;
   text-decoration: none;
 
-  &:hover,
   &:focus {
     outline: none;
     color: $text-basic;
@@ -80,10 +101,6 @@
       border-color: $text-accent;
     }
   }
-}
-
-.procedure__price {
-  min-height: 900px;
 }
 
 .procedure__section {
@@ -161,11 +178,15 @@
 }
 
 .procedure--no-js {
+  .procedure__unit {
+    display: block;
+  }
+
   .procedure__section {
     display: block;
   }
 
-  .procedure__section-title {
+  .procedure__unit-title {
     position: static;
     width: auto;
     height: auto;
@@ -180,13 +201,45 @@
     line-height: 38px;
     text-align: center;
   }
+
+  .procedure__section-title {
+    position: static;
+    width: auto;
+    height: auto;
+
+    border: 0;
+
+    clip: auto;
+    overflow: auto;
+    margin: 0 0 20px 0;
+    padding-top: 20px;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+  }
+
+  .procedure__lead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    border: 0;
+
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
 }
 
 @media (min-width: $tablet-width) {
   .procedure {
-    display: flex;
     padding-top: 70px;
     padding-bottom: 70px;
+  }
+
+  .procedure__unit--current {
+    display: flex;
   }
 
   .procedure__nav {
@@ -217,7 +270,6 @@
   .procedure__price {
     flex: 1 1 auto;
     padding-top: 6px;
-    min-height: 600px;
   }
 
   .procedure__lead {
@@ -259,7 +311,7 @@
     }
   }
 
-  .procedure--no-js {
+  .region--no-js {
     .procedure__section-title {
       text-align: left;
     }
@@ -267,10 +319,6 @@
 }
 
 @media (min-width: $desktop-width) {
-  .procedure__price {
-    min-height: 580px;
-  }
-
   .procedure__nav {
     margin-right: 76px;
   }

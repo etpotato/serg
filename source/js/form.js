@@ -81,9 +81,8 @@ const validateMessage = () => {
 };
 
 const validateForm = () => {
-  return validateName() &&
-    validateAddress() &&
-    validateMessage();
+  const validators = [validateName(), validateAddress(), validateMessage()]
+  return validators.every(validator => validator === true);
 };
 
 // Отправка
@@ -145,7 +144,7 @@ const onSubmit = (evt) => {
   if (validateForm()) {
     sendData(new FormData(evt.target), onSuccessSubmit, onErrorSubmit)
   } else {
-    const emptyInputs = Array.from(form.querySelectorAll('input:placeholder-shown'));
+    const emptyInputs = Array.from(form.querySelectorAll('*:placeholder-shown'));
     emptyInputs.forEach(input => showInputInvalid(input));
     form.querySelector('.contact__form-input--invalid').focus();
   }

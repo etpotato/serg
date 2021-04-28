@@ -1,9 +1,6 @@
 const navWrapper = document.querySelector('.header__nav-wrapper');
+const currentLink = navWrapper.querySelector('.header__nav-link--current');
 const navToggle = navWrapper.querySelector('.header__nav-toggle');
-
-const navUnderlay = document.createElement('div');
-navUnderlay.classList.add('header__nav-underlay');
-navWrapper.prepend(navUnderlay);
 
 const toggleMenu = (evt) => {
   evt.preventDefault();
@@ -18,7 +15,18 @@ const closeMenu = (evt) => {
   navToggle.setAttribute('aria-expanded', 'false');
 };
 
-navWrapper.classList.remove('header__nav-wrapper--no-js');
+const renderUnderlay = () => {
+  const navUnderlay = document.createElement('div');
+  navUnderlay.classList.add('header__nav-underlay');
+  navWrapper.prepend(navUnderlay);
 
+  navUnderlay.addEventListener('click', closeMenu);
+}
+
+renderUnderlay();
+navWrapper.classList.remove('header__nav-wrapper--no-js');
 navToggle.addEventListener('click', toggleMenu);
-navUnderlay.addEventListener('click', closeMenu);
+
+if (currentLink) {
+  currentLink.addEventListener('click', closeMenu);
+}

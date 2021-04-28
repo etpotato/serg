@@ -19,6 +19,59 @@
   text-align: center;
 }
 
+.contact__form-label {
+  position: relative;
+  display: block;
+  padding-top: 30px;
+}
+
+.contact__form-input {
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  border: none;
+  border-radius: 0;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  resize: vertical;
+  outline: none;
+  transition-duration: 100ms;
+
+  &::placeholder {
+    color: transparent;
+  }
+}
+
+.contact__form-input--invalid:focus ~ .contact__form-underline {
+  background-color: $text-invalid;
+}
+
+.contact__form-input:focus ~ .contact__form-underline {
+  height: 2px;
+}
+
+.contact__form-input:focus ~ .contact__form-label-text,
+.contact__form-input:not(:placeholder-shown) ~ .contact__form-label-text {
+  top: 10px;
+
+  font-size: 12px;
+  line-height: 28px;
+  font-weight: 600;
+  color: $text-accent;
+}
+
+.contact__form-underline {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background-color: $border-basic;
+  transition-duration: 100ms;
+}
+
 .contact__form-label-text {
   position: absolute;
   top: 33px;
@@ -39,50 +92,6 @@
   font-size: 12px;
   line-height: 28px;
   color: $text-invalid;
-}
-
-.contact__form-input {
-  display: block;
-  width: 100%;
-  padding: 5px 0;
-  border: none;
-  border-radius: 0;
-  font-size: 16px;
-  line-height: 28px;
-  font-weight: 300;
-  text-overflow: ellipsis;
-  resize: vertical;
-  outline: none;
-  box-shadow: 0 2px 0 -1px $border-basic;
-  transition-duration: 100ms;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &--invalid {
-    box-shadow: 0 2px 0 -1px $text-invalid;
-  }
-}
-
-.contact__form-input:focus {
-  box-shadow: 0 3px 0 -1px $text-accent;
-}
-
-.contact__form-input:focus ~ .contact__form-label-text,
-.contact__form-input:not(:placeholder-shown) ~ .contact__form-label-text {
-  top: 10px;
-
-  font-size: 12px;
-  line-height: 28px;
-  font-weight: 600;
-  color: $text-accent;
-}
-
-.contact__form-label {
-  position: relative;
-  display: block;
-  padding-top: 30px;
 }
 
 .contact__form-submit-wrapper {
