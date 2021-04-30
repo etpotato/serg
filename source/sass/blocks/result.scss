@@ -32,6 +32,7 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+  outline-offset: 4px;
   transition-property: transform box-shadow;
   transition-timing-function: ease-in;
   transition-duration: 100ms;
@@ -95,6 +96,7 @@
 .result__gallery-list {
   @include reset-list;
   margin-bottom: 5px;
+  pointer-events: none;
 }
 
 .result__gallery-item {
@@ -116,17 +118,18 @@
   position: absolute;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
+  min-width: 100%;
 }
 
 .result__pagination-list {
   @include reset-list;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  margin: 0 auto;
   padding-bottom: 5px;
+  font-size: 0;
+  text-align: center;
+  white-space: nowrap;
 
   overflow-x: auto;
   -ms-overflow-style: none;
@@ -139,8 +142,9 @@
 
 .result__pagination-item {
   position: relative;
-  flex: 0 0 20%;
+  display: inline-block;
   margin-right: 5px;
+  width: 20%;
 
   &:last-child {
     margin-right: 0;
@@ -157,17 +161,22 @@
 
       background-color: $background-basic;
       opacity: 0.6;
+      pointer-events: none;
     }
+  }
 
-    &::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: -5px;
-      left: 0;
-      height: 3px;
-      background-color: $text-accent;
-    }
+  &:hover::before,
+  &:focus::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: $background-basic;
+    opacity: 0.6;
+    pointer-events: none;
   }
 }
 
@@ -182,6 +191,24 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  cursor: pointer;
+}
+
+.result__pagination-item-underline {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  left: 0;
+  height: 3px;
+  background-color: $text-accent;
+  transition-property: transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in;
+
+  &--current {
+    display: block;
+  }
 }
 
 .result--no-js {
@@ -217,7 +244,53 @@
 @media (min-width: $tablet-width) {
   .result {
     padding-top: 70px;
+    padding-right: 90px;
     padding-bottom: 160px;
+    padding-left: 90px;
+  }
+
+  .result__title {
+    text-align: left;
+  }
+
+
+  .result__underlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $background-popup-underlay;
+  }
+
+  .result__swipe-wrapper {
+    top: 240px;
+  }
+
+  .result__item {
+    flex-direction: row;
+  }
+
+  .result__text {
+    margin: 0;
+    opacity: 1;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(1, 0.2, 1, 0.2);
+    transition-duration: 300ms;
+  }
+
+  .result__gallery {
+    flex: 0 0 56%;
+    order: -1;
+    margin-right: 30px;
+    margin-bottom: 0;
+    transition-property: flex;
+    transition-timing-function: ease-out;
+    transition-duration: 200ms;
+  }
+
+  .result__gallery-list {
+    pointer-events: all;
   }
 
   .result--no-js {
@@ -231,9 +304,73 @@
       margin-right: 40px;
     }
   }
+
+  .result--popup-open {
+    z-index: 1;
+
+    .result__popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70%;
+      max-width: 1200px;
+    }
+
+    .result__swipe-wrapper {
+      top: 50%;
+      right: -15%;
+      left: -15%;
+      transform: translateY(-50%);
+      padding: 20px;
+    }
+
+    .result__swipe {
+      filter: saturate(0);
+    }
+
+    .result__list {
+      margin-top: 60px;
+      width: 100%;
+    }
+
+    .result__text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .result__gallery {
+      flex: 0 0 100%;
+      margin-right: 0;
+    }
+
+    .result__gallery-list {
+      transition-timing-function: ease-in;
+      pointer-events: none;
+    }
+
+    .result__pagination-item {
+      width: 100px;
+    }
+  }
 }
 
 @media (min-width: $desktop-width) {
+  .result__swipe-wrapper {
+    top: 270px;
+  }
+
   .result--no-js {
     .result__gallery {
       margin-right: 76px;

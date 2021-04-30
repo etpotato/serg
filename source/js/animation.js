@@ -16,7 +16,7 @@ const fadeIn = (el) => {
   el.style.opacity = 0;
   (function fade () {
     let val = parseFloat(el.style.opacity);
-    if ((val += FADE_STEP) > 1) {
+    if ((val += FADE_STEP) >= 1 + FADE_STEP) {
       return;
     }
     el.style.opacity = val;

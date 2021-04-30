@@ -36,10 +36,7 @@ const initializePage = () => {
 
 const onTabClick = (evt) => {
   evt.preventDefault();
-  if (
-    !evt.target.matches('.procedure__nav-link') ||
-    evt.target.matches('.procedure__nav-link--current')
-  ) {
+  if (evt.target.className !== 'procedure__nav-link') {
     return;
   }
 
