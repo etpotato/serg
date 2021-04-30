@@ -36,6 +36,7 @@
   transition-property: transform box-shadow;
   transition-timing-function: ease-in;
   transition-duration: 100ms;
+  cursor: pointer;
 
   &--prev {
     background-image: url("../img/icon-swipe-prev.svg");
@@ -317,7 +318,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 70%;
+      width: 65%;
       max-width: 1200px;
     }
 
