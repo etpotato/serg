@@ -81,6 +81,7 @@
   font-weight: 400;
   color: $text-basic;
   text-decoration: none;
+  user-select: none;
 
   &:focus {
     outline: none;
@@ -279,7 +280,7 @@
     text-align: left;
   }
 
-  .procedure__link {
+  .procedure__nav-link {
     font-size: 18px;
   }
 

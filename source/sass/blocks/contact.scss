@@ -125,6 +125,7 @@
   text-align: center;
   color: $text-contrast;
   background-color: $text-accent;
+  user-select: none;
 
   &:hover,
   &:focus {

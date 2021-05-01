@@ -37,6 +37,7 @@
   transition-timing-function: ease-in;
   transition-duration: 100ms;
   cursor: pointer;
+  user-select: none;
 
   &--prev {
     background-image: url("../img/icon-swipe-prev.svg");
@@ -131,7 +132,7 @@
   font-size: 0;
   text-align: center;
   white-space: nowrap;
-
+  touch-action: none;
   overflow-x: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -181,6 +182,7 @@
   }
 }
 
+
 .result__pagination-button {
   display: block;
   width: 100%;
@@ -193,6 +195,7 @@
   background-size: cover;
   background-position: center;
   cursor: pointer;
+  user-select: none;
 }
 
 .result__pagination-item-underline {
