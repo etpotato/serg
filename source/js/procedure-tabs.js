@@ -40,6 +40,8 @@ const onTabClick = (evt) => {
     return;
   }
 
+  currentUnit.navList.removeEventListener('click', onTabClick);
+
   const prevLink = currentUnit.navList.querySelector('.procedure__nav-link--current');
   const nextLink = evt.target;
   prevLink.classList.remove('procedure__nav-link--current');
@@ -49,11 +51,15 @@ const onTabClick = (evt) => {
   const prevSection = currentUnit.price.querySelector('.procedure__section--current');
   const nextSection = currentUnit.price.querySelector(`${id}`);
 
-  fadeOut(prevSection, () => {
-    prevSection.classList.remove('procedure__section--current');
-    fadeIn(nextSection);
-    nextSection.classList.add('procedure__section--current');
-  });
+  fadeOut(prevSection)
+    .then(() => {
+      prevSection.classList.remove('procedure__section--current');
+      nextSection.classList.add('procedure__section--current');
+      return fadeIn(nextSection);
+    })
+    .then(() => {
+      currentUnit.navList.addEventListener('click', onTabClick);
+    });
 };
 
 const onRegionClick = (evt) => {
@@ -64,6 +70,8 @@ const onRegionClick = (evt) => {
   ) {
     return;
   }
+
+  regionList.removeEventListener('click', onRegionClick);
 
   const prevLink = regionList.querySelector('.header__region-link--current');
   const nextLink = evt.target;
@@ -76,11 +84,15 @@ const onRegionClick = (evt) => {
   const nextUnit = procedure.querySelector(`${id}`);
   const nextNavList = nextUnit.querySelector('.procedure__nav-list');
 
-  fadeOut(prevUnit, () => {
-    prevUnit.classList.remove('procedure__unit--current');
-    fadeIn(nextUnit);
-    nextUnit.classList.add('procedure__unit--current');
-  });
+  fadeOut(prevUnit)
+    .then(() => {
+      prevUnit.classList.remove('procedure__unit--current');
+      nextUnit.classList.add('procedure__unit--current');
+      return fadeIn(nextUnit);
+    })
+    .then(() => {
+      regionList.addEventListener('click', onRegionClick);
+    });
 
   currentUnit.navList = nextNavList;
   currentUnit.price = nextUnit.querySelector('.procedure__price');

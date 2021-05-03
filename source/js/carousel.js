@@ -26,15 +26,17 @@ const paintButtons = (galleries) => {
 
 const closeGalleryPopup = () => {
   const underlay = result.querySelector('.result__underlay');
-  underlay.removeEventListener('click', closeGalleryPopup);
   result.classList.remove('result--popup-open');
-  fadeOut(underlay, () => {
-    underlay.remove();
-  });
-  result.style.height = 'auto';
+  fadeOut(underlay)
+    .then(() => {
+      underlay.remove();
+      result.style.height = 'auto';
+      currentGalleryList.addEventListener('click', onGalleryLinkClick);
+    });
+
   document.body.classList.remove('no-scroll');
-  document.removeEventListener('click', onPopupEsc);
-  currentGalleryList.addEventListener('click', onGalleryLinkClick);
+  underlay.removeEventListener('click', closeGalleryPopup);
+  document.removeEventListener('keydown', onPopupEsc);
 };
 
 const onPopupEsc = (evt) => {
@@ -50,17 +52,21 @@ const onGalleryLinkClick = (evt) => {
   if (!evt.target.className === 'result__gallery-link') {
     return;
   }
+
   const underlay = document.createElement('div');
   underlay.classList.add('result__underlay');
   result.prepend(underlay);
-  fadeIn(underlay);
+  fadeIn(underlay)
+    .then(() => {
+      underlay.addEventListener('click', closeGalleryPopup);
+      document.addEventListener('keydown', onPopupEsc);
+    });
+
   const resultHeight = result.getBoundingClientRect().height;
   result.style.height = `${resultHeight}px`;
   result.classList.add('result--popup-open');
   document.body.classList.add('no-scroll');
   currentGalleryList.removeEventListener('click', onGalleryLinkClick);
-  underlay.addEventListener('click', closeGalleryPopup);
-  document.addEventListener('keydown', onPopupEsc);
 };
 
 const onThumbnailClick = (evt) => {
@@ -73,7 +79,7 @@ const onThumbnailClick = (evt) => {
   }
 
   const currentPaginationList = evt.currentTarget;
-  currentPaginationList.style.pointerEvents = 'none';
+  currentPaginationList.removeEventListener('click', onThumbnailClick);
 
   const prevPaginationItem = currentPaginationItems.find(item => item.matches('.result__pagination-item--current'));
   const prevPaginationItemUnderline = prevPaginationItem.querySelector('.result__pagination-item-underline--current');
@@ -87,26 +93,30 @@ const onThumbnailClick = (evt) => {
   prevPaginationItem.classList.remove('result__pagination-item--current');
   nextPaginationItem.classList.add('result__pagination-item--current');
 
-  let areTransitionsDone = 0;
+  let transitionsDoneCount = 0;
 
-  const activateList = () => {
-    areTransitionsDone += 1;
-    if (areTransitionsDone === 2) {
-      currentPaginationList.style.pointerEvents = 'auto';
+  const activateThumbnails = () => {
+    transitionsDoneCount += 1;
+    if (transitionsDoneCount === 2) {
+      currentPaginationList.addEventListener('click', onThumbnailClick);
     }
   };
 
-  fadeOut(prevGalleryItem, () => {
-    prevGalleryItem.classList.remove('result__gallery-item--current');
-    nextGalleryItem.classList.add('result__gallery-item--current');
-    fadeIn(nextGalleryItem);
-    activateList();
-  });
+  fadeOut(prevGalleryItem)
+    .then(() => {
+      prevGalleryItem.classList.remove('result__gallery-item--current');
+      nextGalleryItem.classList.add('result__gallery-item--current');
+      return fadeIn(nextGalleryItem);
+    })
+    .then(() => {
+      activateThumbnails();
+    });
+
   prevPaginationItemUnderline.addEventListener('transitionend', () => {
     nextPaginationItemUnderline.classList.add('result__pagination-item-underline--current');
     prevPaginationItemUnderline.classList.remove('result__pagination-item-underline--current');
     prevPaginationItemUnderline.style.transform = 'none';
-    activateList();
+    activateThumbnails();
   }, {
     once: true,
   });
@@ -116,6 +126,10 @@ const onThumbnailClick = (evt) => {
 
 const onNextClick = (evt) => {
   evt.preventDefault();
+
+  nextButton.removeEventListener('click', onNextClick);
+  prevButton.removeEventListener('click', onPrevClick);
+
   const prevItem = resultList.querySelector('.result__item--current');
   const prevGalleryList = prevItem.querySelector('.result__gallery-list');
   const prevPaginationList = prevItem.querySelector('.result__pagination-list');
@@ -124,11 +138,18 @@ const onNextClick = (evt) => {
   const nextPaginationList = nextItem.querySelector('.result__pagination-list');
   currentGalleryItems = Array.from(nextGalleryList.childNodes);
   currentPaginationItems = Array.from(nextPaginationList.childNodes);
-  fadeOut(prevItem, () => {
-    prevItem.classList.remove('result__item--current');
-    nextItem.classList.add('result__item--current');
-    fadeIn(nextItem);
-  });
+
+  fadeOut(prevItem)
+    .then(() => {
+      prevItem.classList.remove('result__item--current');
+      nextItem.classList.add('result__item--current');
+      return fadeIn(nextItem);
+    })
+    .then(() => {
+      nextButton.addEventListener('click', onNextClick);
+      prevButton.addEventListener('click', onPrevClick);
+    });
+
   prevGalleryList.removeEventListener('click', onGalleryLinkClick);
   prevPaginationList.removeEventListener('click', onThumbnailClick);
   nextGalleryList.addEventListener('click', onGalleryLinkClick);
@@ -137,6 +158,10 @@ const onNextClick = (evt) => {
 
 const onPrevClick = (evt) => {
   evt.preventDefault();
+
+  nextButton.removeEventListener('click', onNextClick);
+  prevButton.removeEventListener('click', onPrevClick);
+
   const prevItem = resultList.querySelector('.result__item--current');
   const prevGalleryList = prevItem.querySelector('.result__gallery-list');
   const prevPaginationList = prevItem.querySelector('.result__pagination-list');
@@ -145,11 +170,18 @@ const onPrevClick = (evt) => {
   const nextPaginationList = nextItem.querySelector('.result__pagination-list');
   currentGalleryItems = Array.from(nextGalleryList.childNodes);
   currentPaginationItems = Array.from(nextPaginationList.childNodes);
-  fadeOut(prevItem, () => {
-    prevItem.classList.remove('result__item--current');
-    nextItem.classList.add('result__item--current');
-    fadeIn(nextItem);
-  });
+
+  fadeOut(prevItem)
+    .then(() => {
+      prevItem.classList.remove('result__item--current');
+      nextItem.classList.add('result__item--current');
+      return fadeIn(nextItem);
+    })
+    .then(() => {
+      nextButton.addEventListener('click', onNextClick);
+      prevButton.addEventListener('click', onPrevClick);
+    });
+
   prevGalleryList.removeEventListener('click', onGalleryLinkClick);
   prevPaginationList.removeEventListener('click', onThumbnailClick);
   nextGalleryList.addEventListener('click', onGalleryLinkClick);

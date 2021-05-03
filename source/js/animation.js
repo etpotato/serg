@@ -1,6 +1,6 @@
 const FADE_STEP = 0.1;
 
-const fadeOut = (el, afterFade) => {
+const fadeOut = (el) => {
   return new Promise((resolve) => {
     el.style.opacity = 1;
     (function fade() {
@@ -9,19 +9,21 @@ const fadeOut = (el, afterFade) => {
       }
       requestAnimationFrame(fade);
     })();
-  }).then(afterFade);
+  });
 };
 
 const fadeIn = (el) => {
-  el.style.opacity = 0;
-  (function fade () {
-    let val = parseFloat(el.style.opacity);
-    if ((val += FADE_STEP) >= 1 + FADE_STEP) {
-      return;
-    }
-    el.style.opacity = val;
-    requestAnimationFrame(fade);
-  })();
+  return new Promise((resolve) => {
+    el.style.opacity = 0;
+    (function fade () {
+      let val = parseFloat(el.style.opacity);
+      if ((val += FADE_STEP) >= 1 + FADE_STEP) {
+        return resolve();
+      }
+      el.style.opacity = val;
+      requestAnimationFrame(fade);
+    })();
+  });
 };
 
 export { fadeOut, fadeIn };

@@ -2,6 +2,10 @@ const regionList = document.querySelector('.header__region-list');
 
 const PROCEDURE_URL = 'procedure.html';
 
+const onRegionLinkDblClick = (evt) => {
+  evt.preventDefault();
+};
+
 const onRegionLinkClick = (evt) => {
   evt.preventDefault();
 
@@ -17,3 +21,4 @@ const onRegionLinkClick = (evt) => {
 }
 
 regionList.addEventListener('click', onRegionLinkClick);
+regionList.addEventListener('dblclick', onRegionLinkDblClick);
