@@ -535,7 +535,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fadeIn", function() { return fadeIn; });
 const FADE_STEP = 0.1;
 
-const fadeOut = (el, afterFade) => {
+const fadeOut = (el) => {
   return new Promise((resolve) => {
     el.style.opacity = 1;
     (function fade() {
@@ -544,19 +544,21 @@ const fadeOut = (el, afterFade) => {
       }
       requestAnimationFrame(fade);
     })();
-  }).then(afterFade);
+  });
 };
 
 const fadeIn = (el) => {
-  el.style.opacity = 0;
-  (function fade () {
-    let val = parseFloat(el.style.opacity);
-    if ((val += FADE_STEP) >= 1 + FADE_STEP) {
-      return;
-    }
-    el.style.opacity = val;
-    requestAnimationFrame(fade);
-  })();
+  return new Promise((resolve) => {
+    el.style.opacity = 0;
+    (function fade () {
+      let val = parseFloat(el.style.opacity);
+      if ((val += FADE_STEP) >= 1 + FADE_STEP) {
+        return resolve();
+      }
+      el.style.opacity = val;
+      requestAnimationFrame(fade);
+    })();
+  });
 };
 
 
@@ -647,15 +649,17 @@ const paintButtons = (galleries) => {
 
 const closeGalleryPopup = () => {
   const underlay = result.querySelector('.result__underlay');
-  underlay.removeEventListener('click', closeGalleryPopup);
   result.classList.remove('result--popup-open');
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(underlay, () => {
-    underlay.remove();
-  });
-  result.style.height = 'auto';
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(underlay)
+    .then(() => {
+      underlay.remove();
+      result.style.height = 'auto';
+      currentGalleryList.addEventListener('click', onGalleryLinkClick);
+    });
+
   document.body.classList.remove('no-scroll');
-  document.removeEventListener('click', onPopupEsc);
-  currentGalleryList.addEventListener('click', onGalleryLinkClick);
+  underlay.removeEventListener('click', closeGalleryPopup);
+  document.removeEventListener('keydown', onPopupEsc);
 };
 
 const onPopupEsc = (evt) => {
@@ -671,17 +675,21 @@ const onGalleryLinkClick = (evt) => {
   if (!evt.target.className === 'result__gallery-link') {
     return;
   }
+
   const underlay = document.createElement('div');
   underlay.classList.add('result__underlay');
   result.prepend(underlay);
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(underlay);
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(underlay)
+    .then(() => {
+      underlay.addEventListener('click', closeGalleryPopup);
+      document.addEventListener('keydown', onPopupEsc);
+    });
+
   const resultHeight = result.getBoundingClientRect().height;
   result.style.height = `${resultHeight}px`;
   result.classList.add('result--popup-open');
   document.body.classList.add('no-scroll');
   currentGalleryList.removeEventListener('click', onGalleryLinkClick);
-  underlay.addEventListener('click', closeGalleryPopup);
-  document.addEventListener('keydown', onPopupEsc);
 };
 
 const onThumbnailClick = (evt) => {
@@ -694,7 +702,7 @@ const onThumbnailClick = (evt) => {
   }
 
   const currentPaginationList = evt.currentTarget;
-  currentPaginationList.style.pointerEvents = 'none';
+  currentPaginationList.removeEventListener('click', onThumbnailClick);
 
   const prevPaginationItem = currentPaginationItems.find(item => item.matches('.result__pagination-item--current'));
   const prevPaginationItemUnderline = prevPaginationItem.querySelector('.result__pagination-item-underline--current');
@@ -708,26 +716,30 @@ const onThumbnailClick = (evt) => {
   prevPaginationItem.classList.remove('result__pagination-item--current');
   nextPaginationItem.classList.add('result__pagination-item--current');
 
-  let areTransitionsDone = 0;
+  let transitionsDoneCount = 0;
 
-  const activateList = () => {
-    areTransitionsDone += 1;
-    if (areTransitionsDone === 2) {
-      currentPaginationList.style.pointerEvents = 'auto';
+  const activateThumbnails = () => {
+    transitionsDoneCount += 1;
+    if (transitionsDoneCount === 2) {
+      currentPaginationList.addEventListener('click', onThumbnailClick);
     }
   };
 
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevGalleryItem, () => {
-    prevGalleryItem.classList.remove('result__gallery-item--current');
-    nextGalleryItem.classList.add('result__gallery-item--current');
-    Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextGalleryItem);
-    activateList();
-  });
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevGalleryItem)
+    .then(() => {
+      prevGalleryItem.classList.remove('result__gallery-item--current');
+      nextGalleryItem.classList.add('result__gallery-item--current');
+      return Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextGalleryItem);
+    })
+    .then(() => {
+      activateThumbnails();
+    });
+
   prevPaginationItemUnderline.addEventListener('transitionend', () => {
     nextPaginationItemUnderline.classList.add('result__pagination-item-underline--current');
     prevPaginationItemUnderline.classList.remove('result__pagination-item-underline--current');
     prevPaginationItemUnderline.style.transform = 'none';
-    activateList();
+    activateThumbnails();
   }, {
     once: true,
   });
@@ -737,6 +749,10 @@ const onThumbnailClick = (evt) => {
 
 const onNextClick = (evt) => {
   evt.preventDefault();
+
+  nextButton.removeEventListener('click', onNextClick);
+  prevButton.removeEventListener('click', onPrevClick);
+
   const prevItem = resultList.querySelector('.result__item--current');
   const prevGalleryList = prevItem.querySelector('.result__gallery-list');
   const prevPaginationList = prevItem.querySelector('.result__pagination-list');
@@ -745,11 +761,18 @@ const onNextClick = (evt) => {
   const nextPaginationList = nextItem.querySelector('.result__pagination-list');
   currentGalleryItems = Array.from(nextGalleryList.childNodes);
   currentPaginationItems = Array.from(nextPaginationList.childNodes);
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevItem, () => {
-    prevItem.classList.remove('result__item--current');
-    nextItem.classList.add('result__item--current');
-    Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextItem);
-  });
+
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevItem)
+    .then(() => {
+      prevItem.classList.remove('result__item--current');
+      nextItem.classList.add('result__item--current');
+      return Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextItem);
+    })
+    .then(() => {
+      nextButton.addEventListener('click', onNextClick);
+      prevButton.addEventListener('click', onPrevClick);
+    });
+
   prevGalleryList.removeEventListener('click', onGalleryLinkClick);
   prevPaginationList.removeEventListener('click', onThumbnailClick);
   nextGalleryList.addEventListener('click', onGalleryLinkClick);
@@ -758,6 +781,10 @@ const onNextClick = (evt) => {
 
 const onPrevClick = (evt) => {
   evt.preventDefault();
+
+  nextButton.removeEventListener('click', onNextClick);
+  prevButton.removeEventListener('click', onPrevClick);
+
   const prevItem = resultList.querySelector('.result__item--current');
   const prevGalleryList = prevItem.querySelector('.result__gallery-list');
   const prevPaginationList = prevItem.querySelector('.result__pagination-list');
@@ -766,11 +793,18 @@ const onPrevClick = (evt) => {
   const nextPaginationList = nextItem.querySelector('.result__pagination-list');
   currentGalleryItems = Array.from(nextGalleryList.childNodes);
   currentPaginationItems = Array.from(nextPaginationList.childNodes);
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevItem, () => {
-    prevItem.classList.remove('result__item--current');
-    nextItem.classList.add('result__item--current');
-    Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextItem);
-  });
+
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevItem)
+    .then(() => {
+      prevItem.classList.remove('result__item--current');
+      nextItem.classList.add('result__item--current');
+      return Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextItem);
+    })
+    .then(() => {
+      nextButton.addEventListener('click', onNextClick);
+      prevButton.addEventListener('click', onPrevClick);
+    });
+
   prevGalleryList.removeEventListener('click', onGalleryLinkClick);
   prevPaginationList.removeEventListener('click', onThumbnailClick);
   nextGalleryList.addEventListener('click', onGalleryLinkClick);
@@ -1055,6 +1089,8 @@ const onTabClick = (evt) => {
     return;
   }
 
+  currentUnit.navList.removeEventListener('click', onTabClick);
+
   const prevLink = currentUnit.navList.querySelector('.procedure__nav-link--current');
   const nextLink = evt.target;
   prevLink.classList.remove('procedure__nav-link--current');
@@ -1064,11 +1100,15 @@ const onTabClick = (evt) => {
   const prevSection = currentUnit.price.querySelector('.procedure__section--current');
   const nextSection = currentUnit.price.querySelector(`${id}`);
 
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevSection, () => {
-    prevSection.classList.remove('procedure__section--current');
-    Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextSection);
-    nextSection.classList.add('procedure__section--current');
-  });
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevSection)
+    .then(() => {
+      prevSection.classList.remove('procedure__section--current');
+      nextSection.classList.add('procedure__section--current');
+      return Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextSection);
+    })
+    .then(() => {
+      currentUnit.navList.addEventListener('click', onTabClick);
+    });
 };
 
 const onRegionClick = (evt) => {
@@ -1079,6 +1119,8 @@ const onRegionClick = (evt) => {
   ) {
     return;
   }
+
+  regionList.removeEventListener('click', onRegionClick);
 
   const prevLink = regionList.querySelector('.header__region-link--current');
   const nextLink = evt.target;
@@ -1091,11 +1133,15 @@ const onRegionClick = (evt) => {
   const nextUnit = procedure.querySelector(`${id}`);
   const nextNavList = nextUnit.querySelector('.procedure__nav-list');
 
-  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevUnit, () => {
-    prevUnit.classList.remove('procedure__unit--current');
-    Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextUnit);
-    nextUnit.classList.add('procedure__unit--current');
-  });
+  Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevUnit)
+    .then(() => {
+      prevUnit.classList.remove('procedure__unit--current');
+      nextUnit.classList.add('procedure__unit--current');
+      return Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeIn"])(nextUnit);
+    })
+    .then(() => {
+      regionList.addEventListener('click', onRegionClick);
+    });
 
   currentUnit.navList = nextNavList;
   currentUnit.price = nextUnit.querySelector('.procedure__price');
