@@ -550,6 +550,7 @@ const sendData = (data, onSuccess, onError) => {
     'https://echo.htmlacademy.ru/courses',
     {
       method: 'POST',
+      mode: 'no-cors',
       body: data,
     })
     .then((responce) => {
