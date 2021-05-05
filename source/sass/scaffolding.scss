@@ -41,6 +41,11 @@ img {
   max-width: $mobile-width-container;
 }
 
+.no-scroll {
+  height: auto;
+  overflow: auto;
+}
+
 @media (min-width: $tablet-width) {
   .container {
     padding: 0 32px;
