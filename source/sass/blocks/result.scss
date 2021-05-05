@@ -123,6 +123,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 100%;
+
+  & img {
+    display: block;
+  }
 }
 
 .result__pagination-list {

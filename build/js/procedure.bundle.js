@@ -629,21 +629,24 @@ const resultList = result.querySelector('.result__list');
 const resultItems = resultList.childNodes;
 const prevButton = result.querySelector('.result__swipe--prev');
 const nextButton = result.querySelector('.result__swipe--next');
-const resultGalerries = Array.from(resultList.querySelectorAll('.result__gallery'));
 const currentPaginationList = resultList.querySelector('.result__item--current .result__pagination-list');
 const currentGalleryList = resultList.querySelector('.result__item--current .result__gallery-list');
 
-let currentGalleryItems = Array.from(resultList.querySelectorAll('.result__item--current .result__gallery-item'));
-let currentPaginationItems = Array.from(resultList.querySelectorAll('.result__item--current .result__pagination-item'));
+const currentItem = {
+  gallery: resultList.querySelector('.result__item--current .result__gallery'),
+  galleryItems: Array.from(resultList.querySelectorAll('.result__item--current .result__gallery-item')),
+  paginationItems: Array.from(resultList.querySelectorAll('.result__item--current .result__pagination-item')),
+};
 
-const paintButtons = (galleries) => {
-  galleries.forEach(gallery => {
-    const galleryImages = Array.from(gallery.querySelectorAll('.result__gallery-image'));
-    const paginationButtons = Array.from(gallery.querySelectorAll('.result__pagination-button'));
+const paintButtons = (gallery) => {
+  const galleryImages = Array.from(gallery.querySelectorAll('.result__gallery-image img'));
+  const paginationButtons = Array.from(gallery.querySelectorAll('.result__pagination-button'));
 
-    galleryImages.forEach((image, index) => {
-      paginationButtons[index].style.backgroundImage = `url("${image.src}")`;
-    });
+  galleryImages[0].removeAttribute('loading');
+
+  galleryImages.forEach((image, index) => {
+    const backgroundSrc = image.srcset.slice(0, image.srcset.indexOf(' 200w'));
+    paginationButtons[index].style.backgroundImage = `url("${backgroundSrc}")`;
   });
 };
 
@@ -704,17 +707,19 @@ const onThumbnailClick = (evt) => {
   const currentPaginationList = evt.currentTarget;
   currentPaginationList.removeEventListener('click', onThumbnailClick);
 
-  const prevPaginationItem = currentPaginationItems.find(item => item.matches('.result__pagination-item--current'));
+  const prevPaginationItem = currentItem.paginationItems.find(item => item.matches('.result__pagination-item--current'));
   const prevPaginationItemUnderline = prevPaginationItem.querySelector('.result__pagination-item-underline--current');
   const prevPaginationItemX = prevPaginationItem.getBoundingClientRect().x;
-  const prevGalleryItem = currentGalleryItems.find(item => item.matches('.result__gallery-item--current'));
+  const prevGalleryItem = currentItem.galleryItems.find(
+    item => item.matches('.result__gallery-item--current'));
   const nextPaginationItem = evt.target.closest('.result__pagination-item');
   const nextPaginationItemUnderline = nextPaginationItem.querySelector('.result__pagination-item-underline');
   const nextPaginationItemX = nextPaginationItem.getBoundingClientRect().x;
-  const itemIndex = currentPaginationItems.indexOf(nextPaginationItem);
-  const nextGalleryItem = currentGalleryItems[itemIndex];
+  const itemIndex = currentItem.paginationItems.indexOf(nextPaginationItem);
+  const nextGalleryItem = currentItem.galleryItems[itemIndex];
   prevPaginationItem.classList.remove('result__pagination-item--current');
   nextPaginationItem.classList.add('result__pagination-item--current');
+  nextGalleryItem.querySelector('img').removeAttribute('loading');
 
   let transitionsDoneCount = 0;
 
@@ -759,8 +764,9 @@ const onNextClick = (evt) => {
   const nextItem = prevItem.nextSibling ? prevItem.nextSibling : resultItems[0];
   const nextGalleryList = nextItem.querySelector('.result__gallery-list');
   const nextPaginationList = nextItem.querySelector('.result__pagination-list');
-  currentGalleryItems = Array.from(nextGalleryList.childNodes);
-  currentPaginationItems = Array.from(nextPaginationList.childNodes);
+  currentItem.gallery = nextItem.querySelector('.result__gallery');
+  currentItem.galleryItems = Array.from(nextGalleryList.childNodes);
+  currentItem.paginationItems = Array.from(nextPaginationList.childNodes);
 
   Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevItem)
     .then(() => {
@@ -773,6 +779,7 @@ const onNextClick = (evt) => {
       prevButton.addEventListener('click', onPrevClick);
     });
 
+  paintButtons(currentItem.gallery);
   prevGalleryList.removeEventListener('click', onGalleryLinkClick);
   prevPaginationList.removeEventListener('click', onThumbnailClick);
   nextGalleryList.addEventListener('click', onGalleryLinkClick);
@@ -791,8 +798,10 @@ const onPrevClick = (evt) => {
   const nextItem = prevItem.previousSibling ? prevItem.previousSibling : resultItems[resultItems.length - 1];
   const nextGalleryList = nextItem.querySelector('.result__gallery-list');
   const nextPaginationList = nextItem.querySelector('.result__pagination-list');
-  currentGalleryItems = Array.from(nextGalleryList.childNodes);
-  currentPaginationItems = Array.from(nextPaginationList.childNodes);
+  currentItem.gallery = nextItem.querySelector('.result__gallery');
+  currentItem.galleryItems = Array.from(nextGalleryList.childNodes);
+  currentItem.paginationItems = Array.from(nextPaginationList.childNodes);
+
 
   Object(_animation_js__WEBPACK_IMPORTED_MODULE_0__["fadeOut"])(prevItem)
     .then(() => {
@@ -805,6 +814,7 @@ const onPrevClick = (evt) => {
       prevButton.addEventListener('click', onPrevClick);
     });
 
+  paintButtons(currentItem.gallery);
   prevGalleryList.removeEventListener('click', onGalleryLinkClick);
   prevPaginationList.removeEventListener('click', onThumbnailClick);
   nextGalleryList.addEventListener('click', onGalleryLinkClick);
@@ -812,7 +822,7 @@ const onPrevClick = (evt) => {
 };
 
 result.classList.remove('result--no-js');
-paintButtons(resultGalerries);
+paintButtons(currentItem.gallery);
 nextButton.addEventListener('click', onNextClick);
 prevButton.addEventListener('click', onPrevClick);
 currentGalleryList.addEventListener('click', onGalleryLinkClick);
