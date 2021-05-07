@@ -41,6 +41,7 @@
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: 30px 20px;
   background-image: url("../img/icon-menu-burger.svg");
   border: none;
   outline-offset: 4px;
@@ -145,6 +146,7 @@
   }
 
   .header__nav-toggle {
+    background-size: 18px 18px;
     background-image: url("../img/icon-menu-cross.svg");
   }
 

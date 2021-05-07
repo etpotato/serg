@@ -87,7 +87,6 @@ const optimizeImages = () => {
     imagemin.svgo({
       plugins: [
         { removeViewBox: false },
-        { removeDimensions: true }
       ]
     })
   ]))
@@ -118,9 +117,16 @@ exports.sprite = sprite;
 
 // JS
 
-const js = () => {
+const jsDev = () => {
   return gulp.src('source/js/*.js')
-    .pipe(webpack( require('./webpack.config.js') ))
+    .pipe(webpack( require('./webpack.dev.js') ))
+    .pipe(gulp.dest('build/js/'))
+    .pipe(sync.stream());
+}
+
+const jsProd = () => {
+  return gulp.src('source/js/*.js')
+    .pipe(webpack( require('./webpack.prod.js') ))
     .pipe(gulp.dest('build/js/'))
     .pipe(sync.stream());
 }
@@ -146,7 +152,7 @@ exports.server = server;
 const watcher = () => {
   gulp.watch('source/**/*.html', html);
   gulp.watch('source/sass/**/*.scss', styles);
-  gulp.watch('source/**/*.js', js);
+  gulp.watch('source/**/*.js', jsDev);
   gulp.watch('source/fonts/*', copyFonts);
   gulp.watch('source/img/*', gulp.parallel(copyImages, webp));
   gulp.watch('source/img/sprite/*.svg', sprite);
@@ -156,7 +162,7 @@ const watcher = () => {
 
 exports.default = gulp.series(
   clear,
-  gulp.parallel(html, styles, copy, webp, sprite, js),
+  gulp.parallel(html, styles, copy, webp, sprite, jsDev),
   server,
   watcher
 );
@@ -165,5 +171,6 @@ exports.default = gulp.series(
 
 exports.build = gulp.series(
   clear,
-  gulp.parallel(html, styles, copyFonts, optimizeImages, webp, sprite, js)
+  gulp.parallel(html, styles, copyFonts, optimizeImages, webp, sprite, jsProd),
+  server
 );
