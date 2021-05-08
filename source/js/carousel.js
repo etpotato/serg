@@ -1,6 +1,8 @@
 import { fadeOut, fadeIn } from './animation.js';
 import { isEsc } from './util.js';
 
+const THUMBNAIL_TRANSITIONS_COUNT = 2;
+
 const result = document.querySelector('.result');
 const resultList = result.querySelector('.result__list');
 const resultItems = resultList.childNodes;
@@ -97,6 +99,8 @@ const onThumbnailClick = (evt) => {
   }
 
   currentPaginationList.removeEventListener('click', onThumbnailClick);
+  nextButton.removeEventListener('click', onNextClick);
+  prevButton.removeEventListener('click', onPrevClick);
 
   const currentPaginationItemX = currentPaginationItem.getBoundingClientRect().x;
   const nextPaginationItem = evt.target.closest('.result__pagination-item');
@@ -113,8 +117,10 @@ const onThumbnailClick = (evt) => {
 
   const activateThumbnails = () => {
     transitionsDoneCount += 1;
-    if (transitionsDoneCount === 2) {
+    if (transitionsDoneCount === THUMBNAIL_TRANSITIONS_COUNT) {
       currentPaginationList.addEventListener('click', onThumbnailClick);
+      nextButton.addEventListener('click', onNextClick);
+      prevButton.addEventListener('click', onPrevClick);
     }
   };
 
