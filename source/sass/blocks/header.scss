@@ -39,13 +39,20 @@
   width: 40px;
   height: 36px;
   background-color: transparent;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 30px 20px;
-  background-image: url("../img/icon-menu-burger.svg");
+  background-repeat:
+    no-repeat,
+    no-repeat;
+  background-position:
+    center,
+    center;
+  background-size:
+    30px 20px,
+    0;
+  background-image:
+    url("../img/icon-menu-burger.svg"),
+    url("../img/icon-menu-cross.svg");
   border: none;
   outline-offset: 4px;
-  transition-timing-function: ease-in;
   transition-duration: 200ms;
 
   &:hover,
@@ -146,8 +153,7 @@
   }
 
   .header__nav-toggle {
-    background-size: 18px 18px;
-    background-image: url("../img/icon-menu-cross.svg");
+    background-size: 0, 20px 20px;
   }
 
   .header__nav-list {
