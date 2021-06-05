@@ -9,6 +9,19 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  &--animate {
+    visibility: hidden;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 1s;
+    transition-timing-function: ease-in;
+  }
+
+  &--animate-visible {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .about__image {
