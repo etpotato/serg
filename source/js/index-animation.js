@@ -1,6 +1,6 @@
 const START_OFFSET = 4150;
-const OFFSET_POINTS = [2900, 1500, 1000];
-const SCROLL_SHIFT = 100;
+const OFFSET_POINTS = [2900, 1600, 1200];
+const SCROLL_SHIFT = -50;
 const TABLET_WIDTH = '(min-width: 900px)';
 
 const about = document.querySelector('.about');
