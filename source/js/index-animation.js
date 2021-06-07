@@ -1,7 +1,5 @@
-import gsap from 'gsap';
-
 const START_OFFSET = 4150;
-const OFFSET_POINTS = [2800, 1700, 1000];
+const OFFSET_POINTS = [2900, 1500, 1000];
 const SCROLL_SHIFT = 100;
 const TABLET_WIDTH = '(min-width: 900px)';
 
@@ -36,8 +34,7 @@ const onDocumentScroll = () => {
   let i = 0;
   function showWrapperOnScroll () {
     if (currentDashoffset <= OFFSET_POINTS[i]) {
-      // aboutWrappers[i].classList.add('about__wrapper--animate-visible');
-      gsap.to(aboutWrappers[i], { opacity: 1, duration: 0.5, ease: 'power3.in' })
+      aboutWrappers[i].classList.add('about__wrapper--animate-visible');
     }
     if (i >= OFFSET_POINTS.length - 1) {
       return;
@@ -47,8 +44,7 @@ const onDocumentScroll = () => {
   }
   showWrapperOnScroll();
 
-  gsap.to(path, { strokeDashoffset: currentDashoffset , duration: 1 });
-  // path.style.strokeDashoffset = currentDashoffset;
+  path.style.strokeDashoffset = currentDashoffset;
 };
 
 const onWindowResize = () => {
@@ -75,7 +71,7 @@ const onMediaChange = (evt) => {
   }
   aboutWrappers.forEach((wrapper) => wrapper.classList.remove(
     'about__wrapper--animate',
-    // 'about__wrapper--animate-visible',
+    'about__wrapper--animate-visible',
   ));
   document.removeEventListener('scroll', onDocumentScroll);
   window.removeEventListener('resize', onWindowResize);
