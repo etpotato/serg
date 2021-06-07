@@ -55,6 +55,7 @@
     "node": "14.15.0"
   },
   "dependencies": {
+    "gsap": "^3.6.1",
     "validator": "13.6.0"
   }
 }
